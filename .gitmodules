@@ -1,0 +1,3 @@
+[submodule "copy-text.el"]
+	path = copy-text.el
+	url = https://github.com/JohnDevlopment/copy-text.el.git
