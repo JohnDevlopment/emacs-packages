@@ -1,8 +1,13 @@
 # Python script
 
+class A:
+    """Class A."""
+    pass
+
 def func_a():
     """A single-line docstring."""
-    pass
+    a = A()
+    print(a)
 
 def func_b():
     """
@@ -11,4 +16,3 @@ def func_b():
     This is an example of a multiline
     docstring created with ex-python.
     """
-    pass
