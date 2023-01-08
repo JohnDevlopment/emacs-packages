@@ -5,6 +5,7 @@
 ;; Keywords: languages
 ;; Package-Version: 1.0-alpha2
 ;; Version: 1.0-alpha2
+;; Package-Commit: cb70950ca21c899c60b8a122ca7ff4526922441f
 ;;
 ;;; This file is NOT part of GNU Emacs
 
