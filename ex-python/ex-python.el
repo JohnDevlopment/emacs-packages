@@ -65,16 +65,90 @@ and YN Is a character that is either 'y' or 'n'."
 	  (goto-char cp))
       (princ (concat delim initval delim)))))
 
+(python-skeleton-define clsinit nil
+  "Docstring: "
+  "def __init__(self" ("Parameter, %s: "
+		       (unless (equal ?\( (char-before)) ", ")
+		       str) "):" \n
+		       "\"\"\"" str "\"\"\"" \n
+		       > _ \n)
+
+(python-skeleton-define runmod nil
+  "Main function: "
+  "def " str " ():" \n
+  "pass" -
+  \n \n
+  "if __name__ == \"__main\":" \n
+  str "()")
+
+;;;###autoload
+(defun python-add-class-str ()
+  "Utility function to quickly created a __str__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "str" nil "str" "return \"\""))
+
+;;;###autoload
+(defun python-add-class-getitem ()
+  "Utility function that adds a __getitem__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "getitem" "key: str, /" nil))
+
+;;;###autoload
+(defun python-add-class-getattr ()
+  "Utility function that adds a __getattr__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "getattr" "key: str" nil))
+
+(defun python--add-class-method (name argstring rettype &rest body)
+  ;; (interactive "sName: \nsArguments (minus self): \nsReturn type: ")
+  (if (not (python--str-nonempty-p name))
+      (error "empty name argument"))
+  (let ((standard-output (current-buffer)))
+      (indent-for-tab-command)
+      (princ (format "def __%s__(self%s)%s:"
+	     name
+	     (python--insert-nonempty-str argstring ", ")
+	     (python--insert-nonempty-str rettype " -> ")))
+      (newline)
+      (indent-for-tab-command)
+      (if (not (null body))
+	  (dolist (elt body)
+	    (princ elt))
+	(princ "pass"))))
+
+(defun python--insert-nonempty-str (string &optional prefix suffix)
+  (if (python--str-nonempty-p string)
+      (concat prefix string suffix)
+    ""))
+
+(defun python--str-nonempty-p (string)
+  "Returns non-nill if STRING is not empty."
+  (> (length string) 0))
+
 ;; Default keymap
 
 (defvar ex-python-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c i d") 'python-add-docstring)
+    ;; Skeletons
+    (define-key map (kbd "C-c i i") 'python-skeleton-clsinit)
+    (define-key map (kbd "C-c i r") 'python-skeleton-clsinit)
 
     (easy-menu-define ex-python-menu map "Ex-Python Mode menu"
       '("Ex-Python"
 	:help "More Python-specific Features"
 	["Generate Docstring" python-add-docstring]
+	["Add __str__ method" python-add-class-str]
+	["Add __getitem__ method" python-add-class-getitem]
+	["Add __getattr__ method" python-add-class-getattr]
+	"--"
+	("Skeletons"
+	 :help "A submenu for skeletons"
+	 ["Add __init__ method" python-skeleton-clsinit]
+	 ["Add __main__ if body" python-skeleton-runmod])
 	"--"
 	("LSP"
 	 :active (ex-python--lsp-enabled-p)
