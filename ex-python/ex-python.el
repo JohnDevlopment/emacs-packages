@@ -11,8 +11,8 @@
 
 ;;; Commentary:
 ;;
-;; Extra functions that are not available in the default Python
-;; mode implementation.
+;; Extra functions that are not available in the default Python mode
+;; implementation.
 ;;
 ;; Commands:
 ;;
@@ -30,6 +30,8 @@
 (defcustom ex-python-use-lsp nil
   "Non-nil means to use lsp functions."
   :type 'boolean
+  :group 'ex-python
+  :package-version "1.0"
   :safe 'booleanp)
 
 ;;;###autoload
@@ -107,7 +109,6 @@ Inserts the text at point with proper indention."
   (if (not (python--str-nonempty-p name))
       (error "empty name argument"))
   (let ((standard-output (current-buffer)))
-      (indent-for-tab-command)
       (princ (format "def __%s__(self%s)%s:"
 	     name
 	     (python--insert-nonempty-str argstring ", ")
