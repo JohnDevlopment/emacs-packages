@@ -34,6 +34,12 @@
   :package-version "1.0"
   :safe 'booleanp)
 
+(defun python-uncomment-region (beg end &optional arg)
+  "Uncomment each line in the region."
+  (interactive "*r")
+  (if (use-region-p)
+      (comment-region beg end '(4))))
+
 ;;;###autoload
 (defun python-add-docstring (initval yn)
   "Add a docstring to the function.
@@ -141,6 +147,13 @@ Inserts the text at point with proper indention."
     (easy-menu-define ex-python-menu map "Ex-Python Mode menu"
       '("Ex-Python"
 	:help "More Python-specific Features"
+	["Comment Region" comment-region
+	 :help "Comment or uncomment each line in the region"
+	 :active (use-region-p)]
+	["Uncomment Region" python-uncomment-region
+	 :help "Uncomment each line in the region"
+	 :active (use-region-p)]
+	"--"
 	["Generate Docstring" python-add-docstring]
 	["Add __str__ method" python-add-class-str]
 	["Add __getitem__ method" python-add-class-getitem]
