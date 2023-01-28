@@ -3,9 +3,8 @@
 ;; Copyright (C) 2023 John Russell
 ;; Author: John Russell <johndevlopment7@gmail.com>
 ;; Keywords: languages
-;; Package-Version: 1.0-alpha3
-;; Version: 1.0-alpha3
-;; Package-Commit: 6a8f1829dee82c156c77751ab921654a9e806bb5
+;; Package-Version: 1.0-alpha4
+;; Version: 1.0-alpha4
 ;;
 ;;; This file is NOT part of GNU Emacs
 
