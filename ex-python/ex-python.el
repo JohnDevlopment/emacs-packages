@@ -116,8 +116,14 @@ Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "setattr" "key: str, value" "None"))
 
+;;;###autoload
+(defun python-add-class-len ()
+  "Utility function that adds a __len__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "len" nil "int"))
+
 (defun python--add-class-method (name argstring rettype &rest body)
-  ;; (interactive "sName: \nsArguments (minus self): \nsReturn type: ")
   (if (not (python--str-nonempty-p name))
       (error "empty name argument"))
   (let ((standard-output (current-buffer)))
@@ -173,6 +179,7 @@ START and END specify the region to narrow to."
 	["Add __getitem__ method" python-add-class-getitem]
 	["Add __getattr__ method" python-add-class-getattr]
 	["Add __setattr__ method" python-add-class-setattr]
+	["Add __len__ method" python-add-class-len]
 	"--"
 	("Skeletons"
 	 :help "A submenu for skeletons"
