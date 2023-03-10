@@ -143,6 +143,14 @@ Inserts the text at point with proper indention."
     (define-key map (kbd "C-c i i") 'python-skeleton-clsinit)
     (define-key map (kbd "C-c i r") 'python-skeleton-clsinit)
 
+    (define-key map [remap narrow-to-region]
+      (lambda (start end)
+	"Narrow to region and cancel region.
+START and END specify the region to narrow to."
+	(interactive "r")
+	(narrow-to-region start end)
+	(setq deactivate-mark t)))
+
     (easy-menu-define ex-python-menu map "Ex-Python Mode menu"
       '("Ex-Python"
 	:help "More Python-specific Features"
