@@ -85,7 +85,7 @@ and YN Is a character that is either 'y' or 'n'."
   "def " str " ():" \n
   "pass" -
   \n \n
-  "if __name__ == \"__main\":" \n
+  "if __name__ == \"__main__\":" \n
   str "()")
 
 ;;;###autoload
