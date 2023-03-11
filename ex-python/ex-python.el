@@ -88,6 +88,12 @@ and YN Is a character that is either 'y' or 'n'."
   "if __name__ == \"__main__\":" \n
   str "()")
 
+(python-skeleton-define typechecking nil
+  "Imports: "
+  "from typing import TYPE_CHECKING" \n \n
+  "if TYPE_CHECKING:" \n
+  > "from typing import " str _)
+
 ;;;###autoload
 (defun python-add-class-str ()
   "Utility function to quickly created a __str__ method.
@@ -155,6 +161,7 @@ Inserts the text at point with proper indention."
     ;; Skeletons
     (define-key map (kbd "C-c i i") 'python-skeleton-clsinit)
     (define-key map (kbd "C-c i r") 'python-skeleton-runmod)
+    (define-key map (kbd "C-c i t") 'python-skeleton-typechecking)
 
     (define-key map [remap narrow-to-region]
       (lambda (start end)
@@ -184,7 +191,8 @@ START and END specify the region to narrow to."
 	("Skeletons"
 	 :help "A submenu for skeletons"
 	 ["Add __init__ method" python-skeleton-clsinit]
-	 ["Add __main__ if body" python-skeleton-runmod])
+	 ["Add __main__ if body" python-skeleton-runmod]
+	 ["Add TYPE_CHECKING code" python-skeleton-typechecking])
 	"--"
 	("LSP"
 	 :active (ex-python--lsp-enabled-p)
