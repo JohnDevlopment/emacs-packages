@@ -154,7 +154,7 @@ Inserts the text at point with proper indention."
     (define-key map (kbd "C-c i d") 'python-add-docstring)
     ;; Skeletons
     (define-key map (kbd "C-c i i") 'python-skeleton-clsinit)
-    (define-key map (kbd "C-c i r") 'python-skeleton-clsinit)
+    (define-key map (kbd "C-c i r") 'python-skeleton-runmod)
 
     (define-key map [remap narrow-to-region]
       (lambda (start end)
