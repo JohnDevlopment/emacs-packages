@@ -17,6 +17,20 @@
 ;;
 ;;     `python-add-docstring': adds a docstring to the current
 ;;     function.
+;;
+;;     `python-add-class-str': adds a __str__ method to a
+;;     class.
+;;
+;;     `python-add-class-getitem': adds a __getitem method to
+;;     a class.
+;;
+;;     `python-add-class-getattr': adds a __getattr__ method to
+;;     a class.
+;;
+;;     `python-add-class-setattr': adds a __setattr__ method to
+;;     a class.
+;;
+;;     `python-add-class-len': adds a __len__ method to a class.
 
 ;;; Code:
 
