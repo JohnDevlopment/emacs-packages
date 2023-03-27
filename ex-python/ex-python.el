@@ -21,6 +21,9 @@
 ;;     `python-add-class-str': adds a __str__ method to a
 ;;     class.
 ;;
+;;     `python-add-class-repr': adds a __repr__ method to a
+;;     class.
+;;
 ;;     `python-add-class-getitem': adds a __getitem method to
 ;;     a class.
 ;;
@@ -126,6 +129,13 @@ and YN Is a character that is either 'y' or 'n'."
 Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "str" nil "str" "return \"\""))
+
+;;;###autoload
+(defun python-add-class-repr ()
+  "Utility function to quickly created a __repr__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "repr" nil "repr" "return \"\""))
 
 ;;;###autoload
 (defun python-add-class-getitem ()
@@ -243,6 +253,7 @@ Inserts the text at point with proper indention."
 	"--"
 	["Generate Docstring" python-add-docstring]
 	["Add __str__ method" python-add-class-str]
+	["Add __repr__ method" python-add-class-repr]
 	["Add __getitem__ method" python-add-class-getitem]
 	["Add __getattr__ method" python-add-class-getattr]
 	["Add __setattr__ method" python-add-class-setattr]
