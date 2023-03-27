@@ -165,47 +165,27 @@ Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "len" nil "int"))
 
-;;;###autoload
-(defun python-add-class-eq ()
-  "Utility function that adds a __eq__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "eq" "other" "bool" "..."))
+(defmacro python-define-comparison-method (name)
+  "Defines a function to make a comparison method. The resulting function will have
+a name like python-add-class-NAME."
+  (declare (indent 2))
+  (let* ((name (symbol-name name))
+	 (fn (intern (concat "python-add-class-" name))))
+    `(progn
+       (defun ,fn ()
+	 ,(format "Utility function that adds a __%s__ method. Inserts the text with proper
+indentation." name)
+	 (interactive)
+	 (python--add-class-method ,name "other" "bool" "...")))))
 
-;;;###autoload
-(defun python-add-class-ne ()
-  "Utility function that adds a __ne__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "ne" "other" "bool" "..."))
+(macroexpand '(python-define-comparison-method eq))
 
-;;;###autoload
-(defun python-add-class-lt ()
-  "Utility function that adds a __lt__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "lt" "other" "bool" "..."))
-
-;;;###autoload
-(defun python-add-class-le ()
-  "Utility function that adds a __le__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "le" "other" "bool" "..."))
-
-;;;###autoload
-(defun python-add-class-gt ()
-  "Utility function that adds a __gt__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "gt" "other" "bool" "..."))
-
-;;;###autoload
-(defun python-add-class-ge ()
-  "Utility function that adds a __ge__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "ge" "other" "bool" "..."))
+(python-define-comparison-method eq)
+(python-define-comparison-method ne)
+(python-define-comparison-method gt)
+(python-define-comparison-method ge)
+(python-define-comparison-method lt)
+(python-define-comparison-method le)
 
 (defun python--add-class-method (name argstring rettype &rest body)
   (if (not (python--str-nonempty-p name))
