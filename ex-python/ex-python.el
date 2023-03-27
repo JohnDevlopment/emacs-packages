@@ -31,6 +31,18 @@
 ;;     a class.
 ;;
 ;;     `python-add-class-len': adds a __len__ method to a class.
+;;
+;;     `python-add-class-eq': adds a __eq__ method to a class.
+;;
+;;     `python-add-class-ne': adds a __ne__ method to a class.
+;;
+;;     `python-add-class-lt': adds a __lt__ method to a class.
+;;
+;;     `python-add-class-le': adds a __le__ method to a class.
+;;
+;;     `python-add-class-gt': adds a __gt__ method to a class.
+;;
+;;     `python-add-class-ge': adds a __ge__ method to a class.
 
 ;;; Code:
 
@@ -91,7 +103,7 @@ and YN Is a character that is either 'y' or 'n'."
   "def __init__(self" ("Parameter, %s: "
 		       (unless (equal ?\( (char-before)) ", ")
 		       str) "):" \n
-		       "\"\"\"" str "\"\"\"" \n
+		       "\"\"\"\"\"\"" \n
 		       > _ \n)
 
 (python-skeleton-define runmod nil
@@ -143,6 +155,48 @@ Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "len" nil "int"))
 
+;;;###autoload
+(defun python-add-class-eq ()
+  "Utility function that adds a __eq__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "eq" "other" "bool" "..."))
+
+;;;###autoload
+(defun python-add-class-ne ()
+  "Utility function that adds a __ne__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "ne" "other" "bool" "..."))
+
+;;;###autoload
+(defun python-add-class-lt ()
+  "Utility function that adds a __lt__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "lt" "other" "bool" "..."))
+
+;;;###autoload
+(defun python-add-class-le ()
+  "Utility function that adds a __le__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "le" "other" "bool" "..."))
+
+;;;###autoload
+(defun python-add-class-gt ()
+  "Utility function that adds a __gt__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "gt" "other" "bool" "..."))
+
+;;;###autoload
+(defun python-add-class-ge ()
+  "Utility function that adds a __ge__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "ge" "other" "bool" "..."))
+
 (defun python--add-class-method (name argstring rettype &rest body)
   (if (not (python--str-nonempty-p name))
       (error "empty name argument"))
@@ -177,14 +231,6 @@ Inserts the text at point with proper indention."
     (define-key map (kbd "C-c i r") 'python-skeleton-runmod)
     (define-key map (kbd "C-c i t") 'python-skeleton-typechecking)
 
-    (define-key map [remap narrow-to-region]
-      (lambda (start end)
-	"Narrow to region and cancel region.
-START and END specify the region to narrow to."
-	(interactive "r")
-	(narrow-to-region start end)
-	(setq deactivate-mark t)))
-
     (easy-menu-define ex-python-menu map "Ex-Python Mode menu"
       '("Ex-Python"
 	:help "More Python-specific Features"
@@ -201,17 +247,24 @@ START and END specify the region to narrow to."
 	["Add __getattr__ method" python-add-class-getattr]
 	["Add __setattr__ method" python-add-class-setattr]
 	["Add __len__ method" python-add-class-len]
+	("Comparison Methods"
+	 ["Add __eq__  method" python-add-class-eq]
+	 ["Add __ne__  method" python-add-class-ne]
+	 ["Add __lt__  method" python-add-class-lt]
+	 ["Add __le__  method" python-add-class-le]
+	 ["Add __gt__  method" python-add-class-gt]
+	 ["Add __ge__  method" python-add-class-ge])
 	"--"
 	("Skeletons"
 	 :help "A submenu for skeletons"
 	 ["Add __init__ method" python-skeleton-clsinit]
 	 ["Add __main__ if body" python-skeleton-runmod]
 	 ["Add TYPE_CHECKING code" python-skeleton-typechecking])
-	"--"
-	("LSP"
-	 :active (ex-python--lsp-enabled-p)
-	 :help "A submenu for lsp commands."
-	 ["Find definition" lsp-find-definition])
+	;; "--"
+	;; ("LSP"
+	;;  :active (ex-python--lsp-enabled-p)
+	;;  :help "A submenu for lsp commands."
+	;;  ["Find definition" lsp-find-definition])
 	"---"
 	["Disable Ex-Python mode" ex-python-mode]))
     map)
