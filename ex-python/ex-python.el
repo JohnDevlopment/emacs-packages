@@ -24,6 +24,9 @@
 ;;     `python-add-class-repr': adds a __repr__ method to a
 ;;     class.
 ;;
+;;     `python-add-class-setitem': adds a __setitem method to
+;;     a class.
+;;
 ;;     `python-add-class-getitem': adds a __getitem method to
 ;;     a class.
 ;;
@@ -136,6 +139,12 @@ Inserts the text at point with proper indention."
 Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "repr" nil "repr" "return \"\""))
+
+;;;###autoload
+(defun python-add-class-setitem ()
+  "Write a boilerplate __setitem__ method, properly indented at point."
+  (interactive)
+  (python--add-class-method "setitem" "key, value, /" "None"))
 
 ;;;###autoload
 (defun python-add-class-getitem ()
