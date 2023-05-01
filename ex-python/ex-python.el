@@ -132,22 +132,19 @@ and YN Is a character that is either 'y' or 'n'."
 
 ;;;###autoload
 (defun python-add-class-len ()
-  "Utility function that adds a __len__ method.
-Inserts the text at point with proper indention."
+  "Add a boilerplate __len__ method, properly indented at point."
   (interactive)
   (python--add-class-method "len" nil "int" "return 0"))
 
 ;;;###autoload
 (defun python-add-class-str ()
-  "Utility function to quickly created a __str__ method.
-Inserts the text at point with proper indention."
+  "Add a boilerplate __str__ method, properly indented at point."
   (interactive)
   (python--add-class-method "str" nil "str" "return \"\""))
 
 ;;;###autoload
 (defun python-add-class-repr ()
-  "Utility function to quickly created a __repr__ method.
-Inserts the text at point with proper indention."
+  "Add a boilerplate __repr__ method, properly indented at point."
   (interactive)
   (python--add-class-method "repr" nil "repr" "return \"\""))
 
@@ -159,22 +156,19 @@ Inserts the text at point with proper indention."
 
 ;;;###autoload
 (defun python-add-class-getitem ()
-  "Utility function that adds a __getitem__ method.
-Inserts the text at point with proper indention."
+  "Add a boilerplate __getitem__ method, properly indented at point."
   (interactive)
   (python--add-class-method "getitem" "key, /" nil))
 
 ;;;###autoload
 (defun python-add-class-getattr ()
-  "Utility function that adds a __getattr__ method.
-Inserts the text at point with proper indention."
+  "Add a boilerplate __getitem__ method, properly indented at point."
   (interactive)
   (python--add-class-method "getattr" "key: str" nil))
 
 ;;;###autoload
 (defun python-add-class-setattr ()
-  "Utility function that adds a __setattr__ method.
-Inserts the text at point with proper indention."
+  "Add a boilerplate __setattr__ method, properly indented at point."
   (interactive)
   (python--add-class-method "setattr" "key: str, value" "None"))
 
