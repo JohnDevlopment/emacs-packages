@@ -36,6 +36,10 @@
 ;;     `python-add-class-setattr': adds a __setattr__ method to
 ;;     a class.
 ;;
+;;     `python-add-class-get': adds a __get__ method to a class.
+;;
+;;     `python-add-class-set': adds a __set__ method to a class.
+;;
 ;;     `python-add-class-len': adds a __len__ method to a class.
 ;;
 ;;     `python-add-class-eq': adds a __eq__ method to a class.
@@ -174,6 +178,18 @@ Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "setattr" "key: str, value" "None"))
 
+;;;###autoload
+(defun python-add-class-get ()
+  "Write a boilerplate __get__ method, properly indented at point."
+  (interactive)
+  (python--add-class-method "get" "obj, objtype=None" nil))
+
+;;;###autoload
+(defun python-add-class-set ()
+  "Write a boilerplate __set__ method, properly indented at point."
+  (interactive)
+  (python--add-class-method "set" "obj, value" "None"))
+
 (defmacro python-define-comparison-method (name)
   "Defines a function to make a comparison method. The resulting function will have
 a name like python-add-class-NAME."
@@ -249,6 +265,9 @@ indentation." name)
 	 ["Add __setitem__ method" python-add-class-setitem]
 	 ["Add __getattr__ method" python-add-class-getattr]
 	 ["Add __setattr__ method" python-add-class-setattr])
+	("Descriptors"
+	 ["Add __get__ method" python-add-class-get]
+	 ["Add __set__ method" python-add-class-set])
 	("Comparison Methods"
 	 ["Add __eq__  method" python-add-class-eq]
 	 ["Add __ne__  method" python-add-class-ne]

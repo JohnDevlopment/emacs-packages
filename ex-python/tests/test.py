@@ -2,6 +2,13 @@
 
 from dataclasses import dataclass
 
+class SomeDescriptor:
+    def __get__(self, obj, objtype=None):
+        pass
+
+    def __set__(self, obj, value) -> None:
+        pass
+
 class A:
     """Class A."""
 
