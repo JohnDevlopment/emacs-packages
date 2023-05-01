@@ -127,6 +127,13 @@ and YN Is a character that is either 'y' or 'n'."
   > "from typing import " str _)
 
 ;;;###autoload
+(defun python-add-class-len ()
+  "Utility function that adds a __len__ method.
+Inserts the text at point with proper indention."
+  (interactive)
+  (python--add-class-method "len" nil "int" "return 0"))
+
+;;;###autoload
 (defun python-add-class-str ()
   "Utility function to quickly created a __str__ method.
 Inserts the text at point with proper indention."
@@ -166,13 +173,6 @@ Inserts the text at point with proper indention."
 Inserts the text at point with proper indention."
   (interactive)
   (python--add-class-method "setattr" "key: str, value" "None"))
-
-;;;###autoload
-(defun python-add-class-len ()
-  "Utility function that adds a __len__ method.
-Inserts the text at point with proper indention."
-  (interactive)
-  (python--add-class-method "len" nil "int" "return 0"))
 
 (defmacro python-define-comparison-method (name)
   "Defines a function to make a comparison method. The resulting function will have
@@ -243,10 +243,12 @@ indentation." name)
 	["Generate Docstring" python-add-docstring]
 	["Add __str__ method" python-add-class-str]
 	["Add __repr__ method" python-add-class-repr]
-	["Add __getitem__ method" python-add-class-getitem]
-	["Add __getattr__ method" python-add-class-getattr]
-	["Add __setattr__ method" python-add-class-setattr]
 	["Add __len__ method" python-add-class-len]
+	("Attribute Access"
+	 ["Add __getitem__ method" python-add-class-getitem]
+	 ["Add __setitem__ method" python-add-class-setitem]
+	 ["Add __getattr__ method" python-add-class-getattr]
+	 ["Add __setattr__ method" python-add-class-setattr])
 	("Comparison Methods"
 	 ["Add __eq__  method" python-add-class-eq]
 	 ["Add __ne__  method" python-add-class-ne]
