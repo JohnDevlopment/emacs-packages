@@ -142,7 +142,7 @@ Inserts the text at point with proper indention."
   "Utility function that adds a __getitem__ method.
 Inserts the text at point with proper indention."
   (interactive)
-  (python--add-class-method "getitem" "key: str, /" nil))
+  (python--add-class-method "getitem" "key, /" nil))
 
 ;;;###autoload
 (defun python-add-class-getattr ()
@@ -163,7 +163,7 @@ Inserts the text at point with proper indention."
   "Utility function that adds a __len__ method.
 Inserts the text at point with proper indention."
   (interactive)
-  (python--add-class-method "len" nil "int"))
+  (python--add-class-method "len" nil "int" "return 0"))
 
 (defmacro python-define-comparison-method (name)
   "Defines a function to make a comparison method. The resulting function will have
