@@ -15,28 +15,21 @@
 ;;
 ;; Commands:
 ;;
-;;     `python-add-docstring': adds a docstring to the current
-;;     function.
+;;     `python-add-docstring': adds a docstring to the current function.
 ;;
 ;;     `python-add-class-new': adds a __new__ method to a class.
 ;;
-;;     `python-add-class-str': adds a __str__ method to a
-;;     class.
+;;     `python-add-class-str': adds a __str__ method to a class.
 ;;
-;;     `python-add-class-repr': adds a __repr__ method to a
-;;     class.
+;;     `python-add-class-repr': adds a __repr__ method to a class.
 ;;
-;;     `python-add-class-setitem': adds a __setitem method to
-;;     a class.
+;;     `python-add-class-setitem': adds a __setitem method to a class.
 ;;
-;;     `python-add-class-getitem': adds a __getitem method to
-;;     a class.
+;;     `python-add-class-getitem': adds a __getitem method to a class.
 ;;
-;;     `python-add-class-getattr': adds a __getattr__ method to
-;;     a class.
+;;     `python-add-class-getattr': adds a __getattr__ method to a class.
 ;;
-;;     `python-add-class-setattr': adds a __setattr__ method to
-;;     a class.
+;;     `python-add-class-setattr': adds a __setattr__ method to a class.
 ;;
 ;;     `python-add-class-get': adds a __get__ method to a class.
 ;;
