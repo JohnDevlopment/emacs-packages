@@ -2,31 +2,30 @@
 
 from __future__ import annotations
 from dataclasses import dataclass
+import sys, logging
 
 class SomeDescriptor:
     def __get__(self, obj, objtype=None):
-        pass
+        return getattr(obj, self.private_name)
 
     def __set__(self, obj, value) -> None:
-        pass
+        setattr(obj, self.private_name, value)
+
+    def __set_name__(self, owner, name: str) -> None:
+        self.owner = owner
+        self.name = name
+        self.private_name = f"_{name}"
 
 class A:
     """Class A."""
 
-    def __getitem__(self, key, /):
-        pass
+    name = SomeDescriptor()
 
-    def __setitem__(self, key, value, /) -> None:
-        pass
+    def __init__(self, name: str):
+        self.name = name
 
-    def __getattr__(self, key: str):
-        pass
-
-    def __setattr__(self, key: str, value) -> None:
-        pass
-
-    def __len__(self) -> int:
-        return 0
+    def __str__(self) -> str:
+        return "A: " + self.name
 
 @dataclass(frozen=True)
 class Person:
@@ -62,8 +61,8 @@ class Person:
 
 def func_a():
     """A single-line docstring."""
-    a = A()
-    print(a)
+    a1, a2, a3 = A("John"), A("Bob"), A("Crunk")
+    print(a1, a2, a3)
 
 def func_b():
     """
@@ -74,8 +73,21 @@ def func_b():
     """
     pass
 
-def main ():
-    pass
+def main () -> int:
+    logging.basicConfig(level=logging.INFO)
+
+    try:
+        func_name = sys.argv[1]
+        func = globals()[func_name]
+        return func()
+    except IndexError:
+        logging.error("No argument")
+        return 1
+    except KeyError as exc:
+        logging.error("Unknown function name: %r", exc)
+        return 1
+
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
