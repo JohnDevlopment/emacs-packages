@@ -18,6 +18,8 @@
 ;;     `python-add-docstring': adds a docstring to the current
 ;;     function.
 ;;
+;;     `python-add-class-new': adds a __new__ method to a class.
+;;
 ;;     `python-add-class-str': adds a __str__ method to a
 ;;     class.
 ;;
@@ -129,6 +131,16 @@ and YN Is a character that is either 'y' or 'n'."
   "from typing import TYPE_CHECKING" \n \n
   "if TYPE_CHECKING:" \n
   > "from typing import " str _)
+
+;;;###autoload
+(defun python-add-class-new ()
+  "Add a boilerplate __new__ method, properly indented at point."
+  (interactive)
+  (let ((standard-output (current-buffer)))
+    (princ "def __new__(cls, name: str, bases: tuple[type, ...], namespace: dict[str, Any]):")
+    (newline)
+    (indent-for-tab-command)
+    (princ "pass")))
 
 ;;;###autoload
 (defun python-add-class-len ()
