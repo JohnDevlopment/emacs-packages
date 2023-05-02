@@ -57,13 +57,6 @@
   "Extra functionality for Python mode."
   :group 'python)
 
-(defcustom ex-python-use-lsp nil
-  "Non-nil means to use lsp functions."
-  :type 'boolean
-  :group 'ex-python
-  :package-version "1.0"
-  :safe 'booleanp)
-
 (defun python-uncomment-region (beg end &optional arg)
   "Uncomment each line in the region."
   (interactive "*r")
@@ -280,11 +273,6 @@ indentation." name)
 	 ["Add __init__ method" python-skeleton-clsinit]
 	 ["Add __main__ if body" python-skeleton-runmod]
 	 ["Add TYPE_CHECKING code" python-skeleton-typechecking])
-	;; "--"
-	;; ("LSP"
-	;;  :active (ex-python--lsp-enabled-p)
-	;;  :help "A submenu for lsp commands."
-	;;  ["Find definition" lsp-find-definition])
 	"---"
 	["Disable Ex-Python mode" ex-python-mode]))
     map)
@@ -295,10 +283,6 @@ indentation." name)
   "This minor mode should only be used while in Python mode. It
 adds extra commands that are not provided in Python mode.
 
-If `ex-python-use-lsp' is set to a non-nill value, and `lsp'
-is installed and Emacs configured to use it, the Ex-Python menu
-contains a submenu dedicated to lsp commands.
-
 \\{ex-python-mode-map}"
 
   :lighter " xpy"
@@ -308,12 +292,6 @@ contains a submenu dedicated to lsp commands.
   :group 'ex-python)
 
 ;; Internal functions
-
-(defun ex-python--lsp-enabled-p ()
-  "Return non-nill if we can use lsp functions."
-  (and
-   ex-python-use-lsp
-   (fboundp 'lsp)))
 
 (provide 'ex-python)
 
