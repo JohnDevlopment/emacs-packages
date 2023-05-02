@@ -23,6 +23,10 @@
 ;;
 ;;     `python-add-class-repr': adds a __repr__ method to a class.
 ;;
+;;     `python-add-class-len': adds a __len__ method to a class.
+;;
+;; -- Attribute access functions --
+;;
 ;;     `python-add-class-setitem': adds a __setitem method to a class.
 ;;
 ;;     `python-add-class-getitem': adds a __getitem method to a class.
@@ -31,11 +35,13 @@
 ;;
 ;;     `python-add-class-setattr': adds a __setattr__ method to a class.
 ;;
+;; -- Descriptor functions --
+;;
 ;;     `python-add-class-get': adds a __get__ method to a class.
 ;;
 ;;     `python-add-class-set': adds a __set__ method to a class.
 ;;
-;;     `python-add-class-len': adds a __len__ method to a class.
+;; -- Comparison functions --
 ;;
 ;;     `python-add-class-eq': adds a __eq__ method to a class.
 ;;
