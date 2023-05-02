@@ -41,6 +41,8 @@
 ;;
 ;;     `python-add-class-set': adds a __set__ method to a class.
 ;;
+;;     `python-add-class-setname': adds a __set_name__ method to a class.
+;;
 ;; -- Comparison functions --
 ;;
 ;;     `python-add-class-eq': adds a __eq__ method to a class.
@@ -188,6 +190,12 @@ and YN Is a character that is either 'y' or 'n'."
   (interactive)
   (python--add-class-method "set" "obj, value" "None"))
 
+;;;###autoload
+(defun python-add-class-setname ()
+  "Write a boilerplate __set_name__ method, properly indented at point."
+  (interactive)
+  (python--add-class-method "set_name" "owner, name: str" "None"))
+
 (defmacro python-define-comparison-method (name)
   "Defines a function to make a comparison method. The resulting function will have
 a name like python-add-class-NAME."
@@ -265,7 +273,8 @@ indentation." name)
 	 ["Add __setattr__ method" python-add-class-setattr])
 	("Descriptors"
 	 ["Add __get__ method" python-add-class-get]
-	 ["Add __set__ method" python-add-class-set])
+	 ["Add __set__ method" python-add-class-set]
+	 ["Add __set_name__ method" python-add-class-setname])
 	("Comparison Methods"
 	 ["Add __eq__  method" python-add-class-eq]
 	 ["Add __ne__  method" python-add-class-ne]
