@@ -114,7 +114,7 @@ and YN Is a character that is either 'y' or 'n'."
 
 (python-skeleton-define runmod nil
   "Main function: "
-  "def " str " ():" \n
+  "def " str "():" \n
   "pass" -
   \n \n
   "if __name__ == \"__main__\":" \n
