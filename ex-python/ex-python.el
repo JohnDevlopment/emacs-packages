@@ -56,6 +56,61 @@
 ;;     `python-add-class-gt': adds a __gt__ method to a class.
 ;;
 ;;     `python-add-class-ge': adds a __ge__ method to a class.
+;;
+;; -- Math functions --
+;;
+;;     `python-add-class-add': adds a __add__ method to a class.
+;;
+;;     `python-add-class-sub': adds a __sub__ method to a class.
+;;
+;;     `python-add-class-mul': adds a __mul__ method to a class.
+;;
+;;     `python-add-class-matmul': adds a __matmul__ method to a class.
+;;
+;;     `python-add-class-truediv': adds a __truediv__ method to a class.
+;;
+;;     `python-add-class-floordiv': adds a __floordiv__ method to a class.
+;;
+;;     `python-add-class-mod': adds a __mod__ method to a class.
+;;
+;;     `python-add-class-pow': adds a __pow__ method to a class.
+;;
+;;     `python-add-class-lshift': adds a __lshift__ method to a class.
+;;
+;;     `python-add-class-rshift': adds a __rshift__ method to a class.
+;;
+;;     `python-add-class-and': adds a __and__ method to a class.
+;;
+;;     `python-add-class-xor': adds a __xor__ method to a class.
+;;
+;;     `python-add-class-or': adds a __or__ method to a class.
+;;
+;;     `python-add-class-radd': adds a __radd__ method to a class.
+;;
+;;     `python-add-class-rsub': adds a __rsub__ method to a class.
+;;
+;;     `python-add-class-rmul': adds a __rmul__ method to a class.
+;;
+;;     `python-add-class-rmatmul': adds a __rmatmul__ method to a class.
+;;
+;;     `python-add-class-rtruediv': adds a __rtruediv__ method to a class.
+;;
+;;     `python-add-class-rfloordiv': adds a __rfloordiv__ method to a class.
+;;
+;;     `python-add-class-rmod': adds a __rmod__ method to a class.
+;;
+;;     `python-add-class-rpow': adds a __rpow__ method to a class.
+;;
+;;     `python-add-class-rlshift': adds a __rlshift__ method to a class.
+;;
+;;     `python-add-class-rrshift': adds a __rrshift__ method to a class.
+;;
+;;     `python-add-class-rand': adds a __rand__ method to a class.
+;;
+;;     `python-add-class-rxor': adds a __rxor__ method to a class.
+;;
+;;     `python-add-class-ror': adds a __ror__ method to a class.
+;;
 
 ;;; Code:
 
@@ -209,7 +264,7 @@ indentation." name)
 	 (interactive)
 	 (python--add-class-method ,name "other" "bool" "...")))))
 
-(macroexpand '(python-define-comparison-method eq))
+;; (macroexpand '(python-define-comparison-method eq))
 
 (python-define-comparison-method eq)
 (python-define-comparison-method ne)
@@ -217,6 +272,47 @@ indentation." name)
 (python-define-comparison-method ge)
 (python-define-comparison-method lt)
 (python-define-comparison-method le)
+
+(defmacro python-define-math-method (name op)
+  "Defines a function to make a math method. The resulting function will have a
+name like python-add-class-NAME."
+  (declare (indent 2))
+  (let* ((name (symbol-name name))
+	 (fn (intern (concat "python-add-class-" name))))
+    `(progn
+       (defun ,fn ()
+	 ,(format "Adds a __%s__ method to the current class. Inserts the text with proper
+indentation." name)
+	 (interactive)
+	 (python--add-class-method ,name "other" ""
+				   ,(format "return self %s other" (symbol-name op)))))))
+
+(python-define-math-method add +)
+(python-define-math-method sub -)
+(python-define-math-method mul *)
+(python-define-math-method matmul @)
+(python-define-math-method truediv /)
+(python-define-math-method floordiv //)
+(python-define-math-method mod %)
+(python-define-math-method pow **)
+(python-define-math-method lshift <<)
+(python-define-math-method rshift >>)
+(python-define-math-method and &)
+(python-define-math-method xor ^)
+(python-define-math-method or |)
+(python-define-math-method radd +)
+(python-define-math-method rsub -)
+(python-define-math-method rmul *)
+(python-define-math-method rmatmul @)
+(python-define-math-method rtruediv /)
+(python-define-math-method rfloordiv //)
+(python-define-math-method rmod %)
+(python-define-math-method rpow **)
+(python-define-math-method rlshift <<)
+(python-define-math-method rrshift >>)
+(python-define-math-method rand &)
+(python-define-math-method rxor ^)
+(python-define-math-method ror |)
 
 (defun python--add-class-method (name argstring rettype &rest body)
   (if (not (python--str-nonempty-p name))
@@ -282,6 +378,33 @@ indentation." name)
 	 ["Add __le__  method" python-add-class-le]
 	 ["Add __gt__  method" python-add-class-gt]
 	 ["Add __ge__  method" python-add-class-ge])
+	("Math Methods"
+	 ["Add __add__ method" python-add-class-add]
+	 ["Add __sub__ method" python-add-class-sub]
+	 ["Add __mul__ method" python-add-class-mul]
+	 ["Add __matmul__ method" python-add-class-matmul]
+	 ["Add __truediv__ method" python-add-class-truediv]
+	 ["Add __floordiv__ method" python-add-class-floordiv]
+	 ["Add __mod__ method" python-add-class-mod]
+	 ["Add __pow__ method" python-add-class-pow]
+	 ["Add __lshift__ method" python-add-class-lshift]
+	 ["Add __rshift__ method" python-add-class-rshift]
+	 ["Add __and__ method" python-add-class-and]
+	 ["Add __xor__ method" python-add-class-xor]
+	 ["Add __or__ method" python-add-class-or]
+	 ["Add __radd__ method" python-add-class-radd]
+	 ["Add __rsub__ method" python-add-class-rsub]
+	 ["Add __rmul__ method" python-add-class-rmul]
+	 ["Add __rmatmul__ method" python-add-class-rmatmul]
+	 ["Add __rtruediv__ method" python-add-class-rtruediv]
+	 ["Add __rfloordiv__ method" python-add-class-rfloordiv]
+	 ["Add __rmod__ method" python-add-class-rmod]
+	 ["Add __rpow__ method" python-add-class-rpow]
+	 ["Add __rlshift__ method" python-add-class-rlshift]
+	 ["Add __rrshift__ method" python-add-class-rrshift]
+	 ["Add __rand__ method" python-add-class-rand]
+	 ["Add __rxor__ method" python-add-class-rxor]
+	 ["Add __ror__ method" python-add-class-ror])
 	"--"
 	("Skeletons"
 	 :help "A submenu for skeletons"
