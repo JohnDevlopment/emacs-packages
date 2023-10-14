@@ -73,7 +73,7 @@ def func_b():
     """
     pass
 
-def main () -> int:
+def main() -> int:
     logging.basicConfig(level=logging.INFO)
 
     try:
