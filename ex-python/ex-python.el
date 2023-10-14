@@ -27,9 +27,9 @@
 ;;
 ;; -- Attribute access functions --
 ;;
-;;     `python-add-class-setitem': adds a __setitem method to a class.
+;;     `python-add-class-setitem': adds a __setitem__ method to a class.
 ;;
-;;     `python-add-class-getitem': adds a __getitem method to a class.
+;;     `python-add-class-getitem': adds a __getitem__ method to a class.
 ;;
 ;;     `python-add-class-getattr': adds a __getattr__ method to a class.
 ;;
